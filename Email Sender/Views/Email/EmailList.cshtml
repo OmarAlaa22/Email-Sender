@@ -1,0 +1,64 @@
+﻿@model EmailAddress
+
+
+<form method="post" asp-action="SendEmail" id="mailform" >
+    <div class="row  justify-content-between" >
+        <div class="form-group col-md-4 ">
+            <label>Add Emails</label>
+            <input asp-for="Email" type="text" class="form-control w-30 mb-3 " data-role="taginput" aria-describedby="emailHelp" placeholder="Enter Subject">
+            <span asp-validation-for="SubjectMailId" class="text-danger"></span>
+        </div>
+        <div class="col-md-3 mt-4">
+            <button type="submit" class="btn btn-primary "><i class="bi bi-send"></i>Send</button>
+
+        </div>
+    </div>
+ 
+
+<table class="table  table-striped table-bordered text-light">
+    <thead>
+        <tr>
+            <th scope="col">Subject</th>
+            <th scope="col"></th>
+            <th scope="col">Message</th>
+            <th scope="col">Select</th>
+        </tr>
+    </thead>
+    @foreach (var item in (List<Email>) ViewBag.Emails)
+    {
+        <thead>
+            <tr>
+                <th scope="col">@item.Subject</th>
+                <th scope="col"></th>
+                <th scope="col"><i class="bi bi-envelope-at"></i> @item.Message</th>
+                <th scope="col">
+                 <input type="radio" id="" asp-for="SubjectMailId" value="@item.Id">
+                </th>
+            </tr>
+        </thead>
+
+    }
+
+
+
+</table>
+</form>
+
+
+
+
+
+
+@section Scripts{
+
+    <script>
+
+        $('#add_more').click(function () {
+            $(".template").append(" <input asp-for='Email'  type='text' class='form-control w - 30 mb-3' aria-describedby='emailHelp' placeholder='Enter Subject'>");
+        });
+
+
+    </script>
+
+
+}
